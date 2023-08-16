@@ -1,0 +1,1068 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.50
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema nss_db
+--
+
+CREATE DATABASE IF NOT EXISTS nss_db;
+USE nss_db;
+
+--
+-- Definition of table `cert_verify_2017_2019`
+--
+
+DROP TABLE IF EXISTS `cert_verify_2017_2019`;
+CREATE TABLE `cert_verify_2017_2019`(
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nss_stud_id` varchar(45) NOT NULL,
+  `enroll_no` varchar(45) NOT NULL,
+  `prn` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `college_name` varchar(200) NOT NULL,
+  `course` varchar(200) NOT NULL,
+  `nss_batch` varchar(45) NOT NULL,
+  `nss_unit` varchar(45) NOT NULL,
+  `verified_by` varchar(45) NOT NULL,
+  `verified_on` varchar(45) NOT NULL,
+  `verified_desig` varchar(100) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  `iss_on` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=97057 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cert_verify_2017_2019`
+--
+
+/*!40000 ALTER TABLE `cert_verify_2017_2019` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cert_verify_2017_2019` ENABLE KEYS */;
+
+
+--
+-- Definition of table `master_course`
+--
+
+DROP TABLE IF EXISTS `master_course`;
+CREATE TABLE `master_course` (
+  `course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(45) NOT NULL,
+  `course_code` varchar(10) NOT NULL,
+  `course_status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `master_course`
+--
+
+/*!40000 ALTER TABLE `master_course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `master_course` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_assi_log`
+--
+
+DROP TABLE IF EXISTS `nss_assi_log`;
+CREATE TABLE `nss_assi_log` (
+  `log_assi_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `assi_id` bigint(20) NOT NULL,
+  `assi_action` int(2) NOT NULL,
+  `done_ip` varchar(150) NOT NULL,
+  `done_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_assi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_assi_log`
+--
+
+/*!40000 ALTER TABLE `nss_assi_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_assi_log` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_assi_log_action`
+--
+
+DROP TABLE IF EXISTS `nss_assi_log_action`;
+CREATE TABLE `nss_assi_log_action` (
+  `action` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`action`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_assi_log_action`
+--
+
+/*!40000 ALTER TABLE `nss_assi_log_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_assi_log_action` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_audit`
+--
+
+DROP TABLE IF EXISTS `nss_audit`;
+CREATE TABLE `nss_audit` (
+  `nss_audit_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `year` int(4) NOT NULL,
+  `college_id` bigint(20) NOT NULL,
+  `created_po_id` bigint(20) NOT NULL,
+  `upload_audit` varchar(250) NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_audit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_audit`
+--
+
+/*!40000 ALTER TABLE `nss_audit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_audit` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_camp`
+--
+
+DROP TABLE IF EXISTS `nss_camp`;
+CREATE TABLE `nss_camp` (
+  `nss_camp_id` int(20) NOT NULL AUTO_INCREMENT,
+  `college_id` int(20) NOT NULL,
+  `batch_period` varchar(9) NOT NULL,
+  `nss_unit` varchar(7) NOT NULL,
+  `nss_camp_type` enum('spl','mini1','mini2') NOT NULL,
+  `fromdate` date NOT NULL,
+  `todate` date NOT NULL,
+  `nss_camp_desti` varchar(250) NOT NULL,
+  `nss_act` varchar(250) NOT NULL,
+  `hour_camp` int(3) NOT NULL,
+  `nss_camp_image` varchar(50) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `remark` varchar(150) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_camp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_camp`
+--
+
+/*!40000 ALTER TABLE `nss_camp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_camp` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_college`
+--
+
+DROP TABLE IF EXISTS `nss_college`;
+CREATE TABLE `nss_college` (
+  `college_id` int(11) NOT NULL AUTO_INCREMENT,
+  `college_code` varchar(4) NOT NULL,
+  `college_name` varchar(255) NOT NULL,
+  `college_name_for_gradecard` varchar(255) DEFAULT NULL,
+  `college_address` tinytext,
+  `college_district` int(11) NOT NULL,
+  `college_pincode` decimal(6,0) NOT NULL,
+  `college_type` enum('Government','AFC','ABC','SF','ADC') DEFAULT NULL,
+  `college_email` varchar(120) NOT NULL,
+  `college_contact_no` varchar(13) NOT NULL,
+  `college_contact_no2` varchar(13) NOT NULL,
+  `college_status` enum('active','inactive','deleted') NOT NULL,
+  `college_fax` varchar(50) DEFAULT NULL,
+  `nss_college_type` enum('REG','SF') NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`college_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=277 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_college`
+--
+
+/*!40000 ALTER TABLE `nss_college` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_college` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_college_course_map`
+--
+
+DROP TABLE IF EXISTS `nss_college_course_map`;
+CREATE TABLE `nss_college_course_map` (
+  `map_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `college_id` bigint(20) NOT NULL,
+  `course_id` bigint(20) NOT NULL,
+  `status` enum('active','inactive','deleted') NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1172 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_college_course_map`
+--
+
+/*!40000 ALTER TABLE `nss_college_course_map` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_college_course_map` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_college_final`
+--
+
+DROP TABLE IF EXISTS `nss_college_final`;
+CREATE TABLE `nss_college_final` (
+  `college_id` int(11) NOT NULL AUTO_INCREMENT,
+  `college_code` varchar(4) NOT NULL,
+  `college_name` varchar(255) NOT NULL,
+  `college_name_for_gradecard` varchar(255) DEFAULT NULL,
+  `college_address` tinytext,
+  `college_district` int(11) NOT NULL,
+  `college_pincode` decimal(6,0) NOT NULL,
+  `college_type` enum('Government','AFC','ABC','SF','ADC') DEFAULT NULL,
+  `college_email` varchar(120) NOT NULL,
+  `college_contact_no` varchar(13) NOT NULL,
+  `college_contact_no2` varchar(13) NOT NULL,
+  `college_status` enum('active','inactive','deleted') NOT NULL,
+  `college_fax` varchar(50) DEFAULT NULL,
+  `nss_college_type` enum('REG','SF') NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`college_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=261 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_college_final`
+--
+
+/*!40000 ALTER TABLE `nss_college_final` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_college_final` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_course_map`
+--
+
+DROP TABLE IF EXISTS `nss_course_map`;
+CREATE TABLE `nss_course_map` (
+  `course_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `specialisation_id` int(10) NOT NULL,
+  `specialisation_display_name` varchar(500) NOT NULL,
+  `specialisation_status` enum('active','inactive','deleted') NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_course_map`
+--
+
+/*!40000 ALTER TABLE `nss_course_map` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_course_map` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_elig_rep`
+--
+
+DROP TABLE IF EXISTS `nss_elig_rep`;
+CREATE TABLE `nss_elig_rep` (
+  `nss_elig_rep_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nss_enroll_id` varchar(20) NOT NULL,
+  `college_id` int(20) NOT NULL,
+  `batch_period` varchar(10) NOT NULL,
+  `nss_unit` varchar(8) NOT NULL,
+  `nss_stud_id` bigint(20) NOT NULL,
+  `specialisation_display_name` varchar(500) NOT NULL,
+  `stud_name` varchar(50) NOT NULL,
+  `accademic_year` int(4) NOT NULL,
+  `accademic_month` int(2) NOT NULL,
+  `spl_camp` enum('Y','N') NOT NULL,
+  `mini_cmp1` enum('Y','N') NOT NULL,
+  `mini_cmp2` enum('Y','N') NOT NULL,
+  `total_hr` int(3) NOT NULL,
+  `2yr` enum('Y','N') NOT NULL,
+  `stud_gender` enum('F','M') NOT NULL,
+  `nss_enrol` varchar(20) NOT NULL,
+  `remarks` varchar(500) NOT NULL,
+  `prepared_by_po` int(20) NOT NULL,
+  `verified_by_princi` int(20) NOT NULL,
+  `verified_by_admin` int(20) NOT NULL,
+  `eligibile` enum('Y','N') NOT NULL,
+  `verification_id` enum('0','1','1R','2','2R','3','3R','4','8') NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_elig_rep_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_elig_rep`
+--
+
+/*!40000 ALTER TABLE `nss_elig_rep` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_elig_rep` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_faq`
+--
+
+DROP TABLE IF EXISTS `nss_faq`;
+CREATE TABLE `nss_faq` (
+  `nss_faq_id` int(20) NOT NULL AUTO_INCREMENT,
+  `faq_ques` varchar(250) NOT NULL,
+  `faq_ans` varchar(1050) NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_faq_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_faq`
+--
+
+/*!40000 ALTER TABLE `nss_faq` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_faq` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_fund`
+--
+
+DROP TABLE IF EXISTS `nss_fund`;
+CREATE TABLE `nss_fund` (
+  `nss_fund_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `college_id` int(20) NOT NULL,
+  `year` int(4) NOT NULL,
+  `month` int(2) NOT NULL,
+  `date` date NOT NULL,
+  `fund_type` enum('R','S') NOT NULL,
+  `expense_desc` varchar(250) NOT NULL,
+  `amount_spent` int(5) NOT NULL,
+  `upload_file` varchar(200) NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R','4') NOT NULL,
+  `remarks` varchar(150) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_fund_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_fund`
+--
+
+/*!40000 ALTER TABLE `nss_fund` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_fund` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_fund_from_govt`
+--
+
+DROP TABLE IF EXISTS `nss_fund_from_govt`;
+CREATE TABLE `nss_fund_from_govt` (
+  `nss_fund_govt_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `amount` int(7) NOT NULL,
+  `account` varchar(25) NOT NULL,
+  `year` int(4) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `verification_id` enum('3','3R','4') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_fund_govt_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_fund_from_govt`
+--
+
+/*!40000 ALTER TABLE `nss_fund_from_govt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_fund_from_govt` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_fund_sanc`
+--
+
+DROP TABLE IF EXISTS `nss_fund_sanc`;
+CREATE TABLE `nss_fund_sanc` (
+  `nss_fund_sanc_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fund_college_id` int(20) NOT NULL,
+  `fund_college_type` varchar(25) NOT NULL,
+  `year` int(4) NOT NULL,
+  `amount_sanc` varchar(6) NOT NULL,
+  `fund_status` enum('active','inactive') NOT NULL,
+  `verification_id` enum('','3','3R','4') NOT NULL,
+  `remark` varchar(150) NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`nss_fund_sanc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_fund_sanc`
+--
+
+/*!40000 ALTER TABLE `nss_fund_sanc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_fund_sanc` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_fwd_rej_list`
+--
+
+DROP TABLE IF EXISTS `nss_fwd_rej_list`;
+CREATE TABLE `nss_fwd_rej_list` (
+  `nss_fwd_rej_list_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `user_type` enum('po','princi','assi','so') NOT NULL,
+  `category` enum('enroll','atten','report','fund','camp','audit') NOT NULL,
+  `action` enum('fwd','rej') NOT NULL,
+  `fwd_rej_to` enum('po','assi','princi','so') NOT NULL,
+  `detail` varchar(50) NOT NULL,
+  `track` varchar(20) NOT NULL,
+  `action_date` datetime NOT NULL,
+  PRIMARY KEY (`nss_fwd_rej_list_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_fwd_rej_list`
+--
+
+/*!40000 ALTER TABLE `nss_fwd_rej_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_fwd_rej_list` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_login`
+--
+
+DROP TABLE IF EXISTS `nss_login`;
+CREATE TABLE `nss_login` (
+  `login_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `college_id` varchar(250) NOT NULL,
+  `user_type` enum('po','principal','assistant','so') NOT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `first_login` enum('Y','N') NOT NULL,
+  PRIMARY KEY (`login_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=521 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_login`
+--
+
+/*!40000 ALTER TABLE `nss_login` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_login` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_login_attempts`
+--
+
+DROP TABLE IF EXISTS `nss_login_attempts`;
+CREATE TABLE `nss_login_attempts` (
+  `log_attempt_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `captcha_entered` varchar(100) NOT NULL,
+  `actual_captcha` varchar(100) NOT NULL,
+  `user_ip` varchar(100) NOT NULL,
+  `status` enum('success','fail') NOT NULL,
+  `attempt_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_attempt_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8982 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_login_attempts`
+--
+
+/*!40000 ALTER TABLE `nss_login_attempts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_login_attempts` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_m_attendance`
+--
+
+DROP TABLE IF EXISTS `nss_m_attendance`;
+CREATE TABLE `nss_m_attendance` (
+  `m_attendance_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `college_id` bigint(20) NOT NULL,
+  `nss_unit_id` varchar(20) NOT NULL,
+  `batch_period` varchar(9) NOT NULL,
+  `activity_desc` varchar(250) NOT NULL,
+  `date` date NOT NULL,
+  `year` int(4) NOT NULL,
+  `month` int(2) NOT NULL,
+  `hours` varchar(4) NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`m_attendance_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_m_attendance`
+--
+
+/*!40000 ALTER TABLE `nss_m_attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_m_attendance` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_mail_track_create_princi`
+--
+
+DROP TABLE IF EXISTS `nss_mail_track_create_princi`;
+CREATE TABLE `nss_mail_track_create_princi` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=423 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_mail_track_create_princi`
+--
+
+/*!40000 ALTER TABLE `nss_mail_track_create_princi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_mail_track_create_princi` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_manage_enroll_date`
+--
+
+DROP TABLE IF EXISTS `nss_manage_enroll_date`;
+CREATE TABLE `nss_manage_enroll_date` (
+  `nss_manage_enroll_date_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `year` char(4) NOT NULL,
+  `start_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `extended` enum('yes','no','done') NOT NULL,
+  `created_date` datetime NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_manage_enroll_date_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_manage_enroll_date`
+--
+
+/*!40000 ALTER TABLE `nss_manage_enroll_date` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_manage_enroll_date` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_map_camp`
+--
+
+DROP TABLE IF EXISTS `nss_map_camp`;
+CREATE TABLE `nss_map_camp` (
+  `nss_map_id` int(20) NOT NULL AUTO_INCREMENT,
+  `nss_camp_id` int(20) NOT NULL,
+  `nss_stud_id` int(20) NOT NULL,
+  `nss_enroll_id` varchar(20) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_map_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_map_camp`
+--
+
+/*!40000 ALTER TABLE `nss_map_camp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_map_camp` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_map_monthlyatten_stud`
+--
+
+DROP TABLE IF EXISTS `nss_map_monthlyatten_stud`;
+CREATE TABLE `nss_map_monthlyatten_stud` (
+  `nss_map_monthlyatten_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `monthly_id` bigint(20) NOT NULL,
+  `nss_stud_id` bigint(20) NOT NULL,
+  `nss_enroll_id` varchar(20) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_map_monthlyatten_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `nss_map_monthlyatten_stud`
+--
+
+/*!40000 ALTER TABLE `nss_map_monthlyatten_stud` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_map_monthlyatten_stud` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_monthly_fund`
+--
+
+DROP TABLE IF EXISTS `nss_monthly_fund`;
+CREATE TABLE `nss_monthly_fund` (
+  `nss_monthly_fund_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fund_month` enum('01','02','03','04','05','06','07','08','09','10','11','12') NOT NULL,
+  `fund_spent` varchar(15) NOT NULL,
+  `fund_desc` varchar(500) NOT NULL,
+  `fund_attach` varchar(250) NOT NULL,
+  `nss_college_id` int(15) NOT NULL,
+  `uploaded_po_id` int(15) NOT NULL,
+  `year` varchar(4) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_monthly_fund_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_monthly_fund`
+--
+
+/*!40000 ALTER TABLE `nss_monthly_fund` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_monthly_fund` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_monthly_report`
+--
+
+DROP TABLE IF EXISTS `nss_monthly_report`;
+CREATE TABLE `nss_monthly_report` (
+  `nss_monthly_report_id` int(20) NOT NULL AUTO_INCREMENT,
+  `college_id` int(20) NOT NULL,
+  `nss_unit` varchar(7) NOT NULL,
+  `batch_period` varchar(10) NOT NULL,
+  `year` int(4) NOT NULL,
+  `month` int(2) NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `heading` varchar(250) NOT NULL,
+  `content` varchar(250) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `verification_id` enum('0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `remark` varchar(150) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_monthly_report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_monthly_report`
+--
+
+/*!40000 ALTER TABLE `nss_monthly_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_monthly_report` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_notice_board`
+--
+
+DROP TABLE IF EXISTS `nss_notice_board`;
+CREATE TABLE `nss_notice_board` (
+  `nss_notice_board_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `notice_no` varchar(50) NOT NULL,
+  `heading` varchar(70) NOT NULL,
+  `upload` varchar(50) DEFAULT NULL,
+  `path` varchar(100) NOT NULL,
+  `display` enum('Y','N') NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `created_date` datetime NOT NULL,
+  `year` int(4) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_notice_board_id`),
+  UNIQUE KEY `notice_no` (`notice_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_notice_board`
+--
+
+/*!40000 ALTER TABLE `nss_notice_board` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_notice_board` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_photo_activity`
+--
+
+DROP TABLE IF EXISTS `nss_photo_activity`;
+CREATE TABLE `nss_photo_activity` (
+  `photo_activity_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `photo_full_path` varchar(250) DEFAULT NULL,
+  `photo` varchar(250) NOT NULL,
+  `college_id` varchar(250) NOT NULL,
+  `folder_no` int(20) DEFAULT NULL,
+  `no_of_rep` int(20) DEFAULT NULL,
+  `checked` varchar(5) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`photo_activity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_photo_activity`
+--
+
+/*!40000 ALTER TABLE `nss_photo_activity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_photo_activity` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_po`
+--
+
+DROP TABLE IF EXISTS `nss_po`;
+CREATE TABLE `nss_po` (
+  `po_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `po_name` varchar(250) NOT NULL,
+  `po_gender` char(1) NOT NULL,
+  `po_address` varchar(250) NOT NULL,
+  `po_contact` varchar(15) NOT NULL,
+  `po_pin` int(6) NOT NULL,
+  `po_email` varchar(150) NOT NULL,
+  `po_join_date` date NOT NULL,
+  `po_uploaded_img` varchar(250) NOT NULL,
+  `college_id` bigint(20) NOT NULL,
+  `po_status` varchar(10) NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`po_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=254 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_po`
+--
+
+/*!40000 ALTER TABLE `nss_po` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_po` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_po_log`
+--
+
+DROP TABLE IF EXISTS `nss_po_log`;
+CREATE TABLE `nss_po_log` (
+  `log_po_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `po_id` bigint(20) NOT NULL,
+  `po_action` int(2) NOT NULL,
+  `done_ip` varchar(150) NOT NULL,
+  `done_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_po_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9772 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_po_log`
+--
+
+/*!40000 ALTER TABLE `nss_po_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_po_log` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_po_log_action`
+--
+
+DROP TABLE IF EXISTS `nss_po_log_action`;
+CREATE TABLE `nss_po_log_action` (
+  `action` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`action`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_po_log_action`
+--
+
+/*!40000 ALTER TABLE `nss_po_log_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_po_log_action` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_princi_log`
+--
+
+DROP TABLE IF EXISTS `nss_princi_log`;
+CREATE TABLE `nss_princi_log` (
+  `log_princi_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `princi_id` bigint(20) NOT NULL,
+  `princi_action` int(2) NOT NULL,
+  `done_ip` varchar(150) NOT NULL,
+  `done_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_princi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2680 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_princi_log`
+--
+
+/*!40000 ALTER TABLE `nss_princi_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_princi_log` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_princi_log_action`
+--
+
+DROP TABLE IF EXISTS `nss_princi_log_action`;
+CREATE TABLE `nss_princi_log_action` (
+  `action` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`action`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_princi_log_action`
+--
+
+/*!40000 ALTER TABLE `nss_princi_log_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_princi_log_action` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_principal`
+--
+
+DROP TABLE IF EXISTS `nss_principal`;
+CREATE TABLE `nss_principal` (
+  `principal_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `college_id` bigint(20) NOT NULL,
+  `principal_name` varchar(250) NOT NULL,
+  `principal_email` varchar(250) NOT NULL,
+  `principal_contact` varchar(15) NOT NULL,
+  `principal_address` varchar(250) NOT NULL,
+  `principal_pincode` int(6) NOT NULL,
+  `principal_gender` enum('M','F') NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`principal_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_principal`
+--
+
+/*!40000 ALTER TABLE `nss_principal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_principal` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_project`
+--
+
+DROP TABLE IF EXISTS `nss_project`;
+CREATE TABLE `nss_project` (
+  `nss_project_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `project_id` varchar(16) NOT NULL,
+  `heading` varchar(100) NOT NULL,
+  `upload` varchar(150) NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `created_date` date NOT NULL,
+  `year` int(4) NOT NULL,
+  PRIMARY KEY (`nss_project_id`),
+  UNIQUE KEY `project_id` (`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_project`
+--
+
+/*!40000 ALTER TABLE `nss_project` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_project` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_so_log`
+--
+
+DROP TABLE IF EXISTS `nss_so_log`;
+CREATE TABLE `nss_so_log` (
+  `log_so_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `so_id` bigint(20) NOT NULL,
+  `so_action` int(2) NOT NULL,
+  `done_ip` varchar(150) NOT NULL,
+  `done_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`log_so_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_so_log`
+--
+
+/*!40000 ALTER TABLE `nss_so_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_so_log` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_so_log_action`
+--
+
+DROP TABLE IF EXISTS `nss_so_log_action`;
+CREATE TABLE `nss_so_log_action` (
+  `action` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`action`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_so_log_action`
+--
+
+/*!40000 ALTER TABLE `nss_so_log_action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_so_log_action` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_stud`
+--
+
+DROP TABLE IF EXISTS `nss_stud`;
+CREATE TABLE `nss_stud` (
+  `nss_stud_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `account_id` bigint(20) NOT NULL,
+  `current_semester` int(1) NOT NULL,
+  `admission_year` int(4) NOT NULL,
+  `account_student_name` varchar(255) NOT NULL,
+  `college_id` int(10) NOT NULL,
+  `specialisation_id` varchar(250) NOT NULL,
+  `batch` int(1) NOT NULL,
+  `account_student_email` varchar(100) NOT NULL,
+  `account_student_mobileno` varchar(15) NOT NULL,
+  `gender` enum('F','M','O') NOT NULL,
+  `cast` varchar(50) NOT NULL,
+  `account_student_photo` varchar(100) NOT NULL,
+  `student_status` enum('active','inactive','withheld','discontinued','malpractice','NRRE') NOT NULL,
+  `nss_unit_id` int(20) NOT NULL,
+  `nss_enroll_unit` varchar(50) NOT NULL,
+  `nss_enroll_id` varchar(20) NOT NULL,
+  `batch_period` varchar(11) NOT NULL,
+  `enrolled_date` datetime NOT NULL,
+  `blood_group` enum('NULL','O+','O-','A+','A-','B+','B-','AB+','AB-') NOT NULL,
+  `donate` enum('YES','NO') NOT NULL,
+  `verification_id` enum('','0','1','2','3','4','1R','2R','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `details_changed` datetime NOT NULL,
+  `uploaded_date` datetime NOT NULL,
+  `nss_status` enum('null','active','inactive') NOT NULL,
+  `created_date` datetime NOT NULL,
+  `mini1` enum('YES','NO') NOT NULL,
+  `mini2` enum('YES','NO') NOT NULL,
+  `splcamp` enum('YES','NO') NOT NULL,
+  `tot_hr` int(5) unsigned NOT NULL,
+  `elig` enum('','Y','N') NOT NULL,
+  `enroll_end` datetime NOT NULL,
+  `splcamp_start` datetime NOT NULL,
+  `splcamp_end` datetime NOT NULL,
+  `spl_desti` varchar(500) NOT NULL,
+  `iss_on` varchar(45) NOT NULL,
+  `elig_chk` varchar(1) NOT NULL,
+  `fwd_coll` varchar(1) NOT NULL,
+  PRIMARY KEY (`nss_stud_id`),
+  KEY `nss_stud_id` (`nss_stud_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=91153 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_stud`
+--
+
+/*!40000 ALTER TABLE `nss_stud` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_stud` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_unit`
+--
+
+DROP TABLE IF EXISTS `nss_unit`;
+CREATE TABLE `nss_unit` (
+  `unit_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nss_unit_id` varchar(50) NOT NULL,
+  `college_id` bigint(20) NOT NULL,
+  `po_id` bigint(20) NOT NULL,
+  `batch_period` varchar(11) NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `total_stud` int(3) NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  `created_date` datetime NOT NULL,
+  PRIMARY KEY (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_unit`
+--
+
+/*!40000 ALTER TABLE `nss_unit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_unit` ENABLE KEYS */;
+
+
+--
+-- Definition of table `nss_web_content`
+--
+
+DROP TABLE IF EXISTS `nss_web_content`;
+CREATE TABLE `nss_web_content` (
+  `nss_web_id` int(20) NOT NULL AUTO_INCREMENT,
+  `web_text` varchar(1050) NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `verification_id` enum('0','3','4','3R') NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` enum('active','inactive') NOT NULL,
+  PRIMARY KEY (`nss_web_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nss_web_content`
+--
+
+/*!40000 ALTER TABLE `nss_web_content` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nss_web_content` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

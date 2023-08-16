@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+ 
+html, body {
+	margin:0px; /* FF hack: or we'll have double scrollbar showing on the browser */
+	overflow:hidden; /* hide browser's main scrollbar */
+
+}
+
+#main_container {
+	width:100%;
+	background-color:#ffffff; /* DO NOT REMOVE THIS; or you'll have issue w/ the scrollbar, when the mouse pointer is on a white space */
+	overflow-x: scroll;
+	overflow-y: scroll;
+	height:100%;	/* this will make sure that the height will extend at the bottom */
+	position:absolute; /* container div must be absolute, for our fixed bar to work */
+}
+
+/* mnthly attedace tab*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h3{
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.tabs{
+    width: 1000px;
+    display: block;
+    margin: 15px auto;
+    position: relative;
+}
+
+.tabs .tab{
+    float: left;
+    display: block;
+}
+
+.tabs .tab>input[type="radio"] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.tabs .tab>label {
+     
+    padding: 6px 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    color: #000;
+    background: #999;
+	border-radius:25px;
+	
+}
+
+.tabs .content {
+    z-index: 0;/* or display: none; */
+    overflow: hidden;
+    width: 1000px;
+    padding: 15px;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    background: #FFF	;
+    color: #000;
+	border: 1px solid #ccc;
+    
+    opacity:0;
+    transition: opacity 400ms ease-out;
+}
+
+.tabs>.tab>[id^="tab"]:checked + label {
+    top: 0;
+    background:#edf1f7 ;
+    color: #000;
+}
+
+.tabs>.tab>[id^="tab"]:checked ~ [id^="tab-content"] {
+    z-index: 1;/* or display: block; */
+   
+    opacity: 1;
+    transition: opacity 400ms ease-out;
+}
